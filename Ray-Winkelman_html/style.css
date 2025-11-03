@@ -43,6 +43,47 @@ A:hover   { color:red; text-decoration: none;}
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 9mm;
+    margin-bottom: 9mm;
     max-width: 100%;
     height: auto;
+}
+/* Adjust spacing between specific images */
+#content img[src='image1.png'] {
+    margin-bottom: 6.5mm;
+}
+#content img[src='image2.png'] {
+    margin-top: 6.5mm;
+    margin-bottom: 12.5mm;
+}
+#content img[src='image3.png'] {
+    margin-top: 12.5mm;
+}
+/* Fixed floating download button */
+.download-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #22437f;
+    color: white !important;
+    padding: 15px 25px;
+    border-radius: 50px;
+    text-decoration: none !important;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: inline-block;
+    line-height: 1.4;
+}
+.download-button:hover {
+    background-color: #1a3460;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+    color: white !important;
+}
+.download-button::before {
+    content: "⬇ ";
+    font-size: 18px;
 }
