@@ -347,6 +347,7 @@ Every post must be assigned exactly one of these categories:
 | `Tax` | Offshore tax residencies, flag theory, territorial tax, legal structures |
 | `AEO` | Answer engine optimization, AI search visibility, prompt-based discovery |
 | `SEO` | Search strategy, content architecture, technical SEO, link building |
+| `Banking` | Non-resident banking, offshore accounts, fintech tools, asset protection |
 | `DabDash` | DabDash.com platform updates, cannabis delivery market, SaaS |
 | `Prepped` | OrderPrepped.com updates, food/catering industry, meal prep |
 | `American Gun Trader` | AmericanGunTrader.com updates, firearms market, P2P marketplace |
