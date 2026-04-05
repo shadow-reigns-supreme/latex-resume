@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "exclude": [],
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": true,
+    "types": ["@playwright/test"]
+  },
+  "include": ["**/*.ts"]
+}

@@ -82,7 +82,10 @@ const jsonLd = { "@context": "https://schema.org", "@graph": jsonLdGraph };
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
-  <script is:inline>document.documentElement.classList.add('js')</script>
+  <script is:inline>
+    document.documentElement.classList.add('js');
+    (function(){const t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();
+  </script>
   <ClientRouter />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -141,6 +144,23 @@ const jsonLd = { "@context": "https://schema.org", "@graph": jsonLdGraph };
     <a href="/orderprepped/" aria-current={path === '/orderprepped/' ? 'page' : undefined}>Prepped</a>
     <span class="nav-sep" aria-hidden="true">/</span>
     <a href="/blog/" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
+    <span class="nav-sep" aria-hidden="true">/</span>
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <svg class="icon-sun" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <circle cx="6.5" cy="6.5" r="2.25"/>
+        <line x1="6.5" y1="0.5" x2="6.5" y2="1.75"/>
+        <line x1="6.5" y1="11.25" x2="6.5" y2="12.5"/>
+        <line x1="0.5" y1="6.5" x2="1.75" y2="6.5"/>
+        <line x1="11.25" y1="6.5" x2="12.5" y2="6.5"/>
+        <line x1="2.4" y1="2.4" x2="3.3" y2="3.3"/>
+        <line x1="9.7" y1="9.7" x2="10.6" y2="10.6"/>
+        <line x1="10.6" y1="2.4" x2="9.7" y2="3.3"/>
+        <line x1="3.3" y1="9.7" x2="2.4" y2="10.6"/>
+      </svg>
+      <svg class="icon-moon" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10.5 8A5 5 0 0 1 5 2.5a5 5 0 1 0 5.5 5.5z"/>
+      </svg>
+    </button>
   </nav>
 
   <header class="wp-header reveal">
@@ -179,58 +199,7 @@ const jsonLd = { "@context": "https://schema.org", "@graph": jsonLdGraph };
   </footer>
 
   <script>
-    // —— Outbound UTM ——
-    for (const a of document.querySelectorAll('a[href]')) {
-  const href = a.getAttribute('href');
-  if (!href || !href.startsWith('http') || href.includes('raywinkelman.com')) continue;
-  try {
-    const u = new URL(href);
-    if (!u.searchParams.has('utm_source')) {
-      u.searchParams.set('utm_source', 'raywinkelman.com');
-      a.setAttribute('href', u.toString());
-    }
-  } catch {}
-}
-
-    // —— Scroll reveal (header + footer) ——
-    const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        for (const e of entries) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    }
-      }, { rootMargin: '0px 0px -30px 0px', threshold: 0.05 });
-      for (const [i, el] of reveals.entries()) {
-    el.style.setProperty('--reveal-delay', `${i * 0.07}s`);
-    io.observe(el);
-  }
-    } else {
-      for (const el of reveals) el.classList.add('visible');
-    }
-
-    // —— wp-body child reveals ——
-    const wpBody = document.querySelector('.wp-body');
-    if (wpBody && 'IntersectionObserver' in window) {
-      const children = Array.from(wpBody.children);
-      const wpIo = new IntersectionObserver((entries) => {
-        for (const e of entries) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); wpIo.unobserve(e.target); }
-    }
-      }, { rootMargin: '0px 0px -20px 0px', threshold: 0.05 });
-      for (const [i, el] of children.entries()) {
-    el.style.setProperty('--wp-i', String(i));
-    wpIo.observe(el);
-  }
-    }
-
-    // —— Nav backdrop on scroll ——
-    if (!window.__navScrollBound) {
-      window.__navScrollBound = true;
-      window.addEventListener('scroll', () => {
-        const n = document.querySelector('.top-nav');
-        if (n) n.classList.toggle('scrolled', window.scrollY > 10);
-      }, { passive: true });
-    }
+    import '../scripts/page-init';
   </script>
 
 </body>

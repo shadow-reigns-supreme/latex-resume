@@ -32,6 +32,24 @@
   }
 }
 
+html[data-theme="light"] {
+  --bg:         #f5f4f0;
+  --text:       #1c1b18;
+  --text-muted: #71706b;
+  --accent:     #2d4a7a;
+  --rule:       #d5d4d0;
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  --bg:         #141416;
+  --text:       #e5e4e0;
+  --text-muted: #908f8a;
+  --accent:     #8ab0e2;
+  --rule:       #2c2c30;
+  color-scheme: dark;
+}
+
 /* —— View Transitions —— */
 ::view-transition-old(root) {
   animation-duration: 0.15s;
@@ -100,6 +118,15 @@ a:hover {
 
 .synopsis-wrap p {
   margin: 0;
+}
+
+.synopsis-wrap p a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.synopsis-wrap p a:hover {
+  text-decoration-color: var(--accent);
 }
 
 .headshot {
@@ -214,6 +241,33 @@ a:hover {
   user-select: none;
   pointer-events: none;
 }
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  transition: color 0.18s ease;
+}
+.theme-toggle:hover { color: var(--text); }
+
+/* Show moon (→ go dark) in light mode; show sun (→ go light) in dark mode */
+.theme-toggle .icon-sun  { display: none; }
+.theme-toggle .icon-moon { display: inline-flex; }
+
+@media (prefers-color-scheme: dark) {
+  .theme-toggle .icon-sun  { display: inline-flex; }
+  .theme-toggle .icon-moon { display: none; }
+}
+
+html[data-theme="light"] .theme-toggle .icon-sun  { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: inline-flex; }
+html[data-theme="dark"]  .theme-toggle .icon-sun  { display: inline-flex; }
+html[data-theme="dark"]  .theme-toggle .icon-moon { display: none; }
 
 /* —— Sections —— */
 .section {
@@ -465,6 +519,12 @@ a:has(> .role-venture-logo):focus-visible {
   font-size: 1.0625rem;
   font-weight: 700;
   letter-spacing: 0.01em;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.venture-name:hover {
+  text-decoration-color: var(--accent);
 }
 
 .venture-blurb {

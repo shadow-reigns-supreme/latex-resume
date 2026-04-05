@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "exclude": ["eslint.config.js"],
+  "exclude": ["eslint.config.js", "tests", "playwright.config.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
