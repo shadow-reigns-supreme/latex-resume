@@ -219,6 +219,16 @@ const jsonLd = currentLang === 'en' ? {
   {jsonLd && (
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
+  {import.meta.env.PROD && <>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NB9KBMYQN2"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args){dataLayer.push(args);}
+      gtag('js', new Date());
+      gtag('config', 'G-NB9KBMYQN2');
+    </script>
+  </>}
 </head>
 <body>
 
