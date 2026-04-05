@@ -2,9 +2,9 @@ import type { ResumeData } from './types';
 
 export const en: ResumeData = {
   lang: 'en',
-  title: 'Ray Winkelman — CEO & Software Engineering Leader',
-  description: 'Technology business leader with expertise in software architecture, executive leadership, and SDLC. CEO of Shadow Software LLC, delivering applications processing millions of e-commerce transactions for global brands.',
-  keywords: 'Ray Winkelman, Software Engineer, CEO, Shadow Software, .NET, React, AWS, Azure, Google Cloud',
+  title: 'Ray Winkelman',
+  description: 'Ray Winkelman is the founder and CEO of Shadow Software LLC. SaaS builder, software architect, and full-time nomad. Creator of AmericanGunTrader.com, DabDash.com, and OrderPrepped.com.',
+  keywords: 'Ray Winkelman, Shadow Software LLC',
   ogLocale: 'en_US',
   location: 'Remote / Nomad',
   labels: {
@@ -16,8 +16,8 @@ export const en: ResumeData = {
     print: 'Print',
     langNav: 'Language',
   },
-  synopsis: 'Entrepreneur and software executive. Founder & CEO of Shadow Software LLC. Offshore tax specialist, SEO/AEO consultant, and builder of platforms in firearms, cannabis delivery, and food service.',
-  synopsisHtml: 'Entrepreneur and software executive. Founder &amp; CEO of <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">Shadow Software LLC</a>. Offshore tax specialist, SEO/AEO consultant, and builder of platforms in firearms, cannabis delivery, and food service.',
+  synopsis: 'SaaS founder and software architect. Building platforms full-time through Shadow Software LLC. Offshore tax specialist, SEO/AEO consultant, and founder of AmericanGunTrader.com, DabDash.com, and OrderPrepped.com.',
+  synopsisHtml: 'SaaS founder and software architect. Building platforms full-time through <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">Shadow Software LLC</a>. Offshore tax specialist, SEO/AEO consultant, and founder of AmericanGunTrader.com, DabDash.com, and OrderPrepped.com.',
   venturesContext: 'Built and scaled through Shadow Software LLC.',
   ventures: [
     {

@@ -1,0 +1,48 @@
+---
+import Whitepaper from '../../layouts/Whitepaper.astro';
+
+const { slug } = Astro.params;
+
+let post: {
+  title: string;
+  excerpt: string;
+  html: string;
+  category: string;
+  keyword: string;
+  lang: string;
+  slug: string;
+  published_at: string;
+} | null = null;
+
+try {
+  const res = await fetch(
+    `https://n8n.americanguntrader.com/webhook/8d5b7bc7-f6ac-4b6c-a8ff-77296fb40e6a?slug=${encodeURIComponent(slug ?? '')}`,
+    { headers: { 'x-shadowmen': '508e7579-374c-47ec-9d6d-a024f9a65a89' } }
+  );
+  if (res.ok) {
+    const data = await res.json();
+    if (data && data.slug) post = data;
+  }
+} catch (_) {}
+
+if (!post) return Astro.redirect('/blog/', 302);
+
+const date = new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+
+<Whitepaper
+  title={`${post.title} — Ray Winkelman`}
+  description={post.excerpt}
+  lang={post.lang ?? 'en'}
+  logo="/ray.png"
+  platformName={post.title}
+  platformUrl="https://raywinkelman.com/blog/"
+  tagline={`${post.category} · ${date}`}
+  path={`/blog/${post.slug}/`}
+  datePublished={post.published_at}
+  showVisitLink={false}
+>
+
+<Fragment set:html={post.html} />
+
+</Whitepaper>

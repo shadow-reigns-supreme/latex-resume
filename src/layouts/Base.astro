@@ -30,7 +30,8 @@ const jsonLd = currentLang === 'en' ? {
       "url": "https://raywinkelman.com",
       "name": "Ray Winkelman",
       "description": data.description,
-      "inLanguage": "en-US"
+      "inLanguage": "en-US",
+      "author": { "@id": "https://raywinkelman.com/#person" }
     },
     {
       "@type": "Organization",
@@ -38,6 +39,8 @@ const jsonLd = currentLang === 'en' ? {
       "name": "Shadow Software LLC",
       "url": "https://raywinkelman.com",
       "founder": { "@id": "https://raywinkelman.com/#person" },
+      "foundingDate": "2019",
+      "knowsAbout": ["Software Architecture", "SaaS", "E-Commerce", "Marketplace Platforms"],
       "sameAs": [
         "https://americanguntrader.com",
         "https://dabdash.com",
@@ -50,27 +53,106 @@ const jsonLd = currentLang === 'en' ? {
       "name": "Ray Winkelman",
       "givenName": "Ray",
       "familyName": "Winkelman",
-      "jobTitle": "Chief Executive Officer & Founder",
+      "description": "Ray Winkelman is a SaaS founder, software architect, and full-time nomad. He is the Founder and CEO of Shadow Software LLC, and the creator of AmericanGunTrader.com, DabDash.com, and OrderPrepped.com. Originally from Nova Scotia, Canada, he operates location-independently and is not based in Canada.",
+      "jobTitle": "Founder & CEO",
+      "nationality": {
+        "@type": "Country",
+        "name": "Canada"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Founder & CEO",
+        "description": "Full-time SaaS founder and software architect. Builds and operates platform businesses through Shadow Software LLC. Not available for hire.",
+        "skills": "SaaS, Software Architecture, .NET, C#, React, Vue.js, AWS, Azure, Google Cloud, Microservices, REST APIs, SEO, AEO, Offshore Tax Optimisation"
+      },
       "worksFor": { "@id": "https://raywinkelman.com/#organization" },
       "url": "https://raywinkelman.com",
-      "image": "https://raywinkelman.com/ray.png",
-      "email": "resume@raywinkelman.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "Nomad"
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://raywinkelman.com/ray.png",
+        "width": 120,
+        "height": 120
       },
+      "email": "resume@raywinkelman.com",
       "alumniOf": [
-        { "@type": "EducationalOrganization", "name": "Nova Scotia Community College" },
-        { "@type": "EducationalOrganization", "name": "Acadia University" }
+        {
+          "@type": "EducationalOrganization",
+          "name": "Nova Scotia Community College",
+          "url": "https://www.nscc.ca",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Nova Scotia",
+            "addressCountry": "CA"
+          }
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Acadia University",
+          "url": "https://www.acadiau.ca",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Nova Scotia",
+            "addressCountry": "CA"
+          }
+        }
       ],
       "knowsAbout": [
-        "Software Architecture", "Executive Leadership", ".NET",
-        "React", "Vue.js", "AWS", "Azure", "Google Cloud"
+        "Software Architecture", "Executive Leadership", ".NET", "C#",
+        "React", "Vue.js", "AWS", "Azure", "Google Cloud",
+        "Microservices", "REST APIs", "Agile", "Scrum",
+        "SEO", "AEO", "Answer Engine Optimization",
+        "Offshore Tax Optimization", "Flag Theory", "Territorial Taxation",
+        "SaaS", "Marketplace Platforms", "E-Commerce"
       ],
       "sameAs": [
         "https://americanguntrader.com",
         "https://dabdash.com",
         "https://orderprepped.com"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is Ray Winkelman?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ray Winkelman is a SaaS founder, software architect, and full-time nomad. He is the Founder and CEO of Shadow Software LLC, and the creator of AmericanGunTrader.com, DabDash.com, and OrderPrepped.com. He builds and operates platform businesses full-time and is not available for hire."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Ray Winkelman from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ray Winkelman is originally from Nova Scotia, Canada, where he studied at Nova Scotia Community College and Acadia University. He does not currently live in Canada — he operates as a full-time nomad and travels the world while running his businesses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What companies has Ray Winkelman founded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ray Winkelman founded Shadow Software LLC. Through Shadow Software, he built AmericanGunTrader.com (a commission-free firearms marketplace), DabDash.com (a SaaS platform for cannabis delivery retailers), and OrderPrepped.com (meal prep and catering automation software)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does Ray Winkelman do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ray Winkelman builds and operates SaaS and marketplace platforms full-time through Shadow Software LLC. He also consults on SEO, AEO (answer engine optimisation), and offshore tax residency strategies for location-independent entrepreneurs. He does not hold a job or work for hire."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Ray Winkelman available for hire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Ray Winkelman is a full-time founder focused exclusively on building his own platforms through Shadow Software LLC. He is not available for employment or contract work."
+          }
+        }
       ]
     }
   ]
@@ -107,13 +189,17 @@ const jsonLd = currentLang === 'en' ? {
   <meta property="og:image" content="https://raywinkelman.com/ray.png">
   <meta property="og:image:width" content="120">
   <meta property="og:image:height" content="120">
+  <meta property="og:image:alt" content="Ray Winkelman — SaaS Founder & Software Architect">
   <meta property="og:locale" content={data.ogLocale}>
   <meta property="og:site_name" content="Ray Winkelman">
+  <meta property="profile:first_name" content="Ray">
+  <meta property="profile:last_name" content="Winkelman">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content={data.title}>
   <meta name="twitter:description" content={data.description}>
   <meta name="twitter:image" content="https://raywinkelman.com/ray.png">
+  <meta name="twitter:image:alt" content="Ray Winkelman — SaaS Founder & Software Architect">
 
   <link rel="alternate" hreflang="en" href="https://raywinkelman.com/">
   <link rel="alternate" hreflang="es" href="https://raywinkelman.com/es/">
@@ -158,7 +244,11 @@ const jsonLd = currentLang === 'en' ? {
     <section class="section reveal">
       <h2 class="section-label">{data.labels.synopsis}</h2>
       <div class="synopsis-wrap">
-        <img src="/ray.png" alt="Ray Winkelman" class="headshot" width="72" height="72">
+        <picture>
+          <source srcset="/ray.avif" type="image/avif">
+          <source srcset="/ray.webp" type="image/webp">
+          <img src="/ray.png" alt="Ray Winkelman" class="headshot" width="72" height="72" loading="lazy">
+        </picture>
         {data.synopsisHtml ? <p set:html={data.synopsisHtml} /> : <p>{data.synopsis}</p>}
       </div>
     </section>
@@ -191,7 +281,7 @@ const jsonLd = currentLang === 'en' ? {
 
   <footer class="site-footer reveal">
     <span>&copy; {year} Ray Winkelman &middot; <a href="/blog/">Blog</a></span>
-    <button class="download-btn" onclick="window.print()">{data.labels.print || data.labels.download}</button>
+    <button class="download-btn" type="button" aria-label="Print or download resume as PDF">{data.labels.print || data.labels.download}</button>
   </footer>
 
   <script>
@@ -207,6 +297,9 @@ const jsonLd = currentLang === 'en' ? {
         }
       } catch (_) {}
     });
+
+    // —— Print button ——
+    document.querySelector('.download-btn')?.addEventListener('click', () => window.print());
 
     // —— Email reveal ——
     document.querySelectorAll('a.email-link').forEach(function(a) {

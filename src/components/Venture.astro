@@ -8,11 +8,17 @@ interface Props {
 }
 
 const { name, url, whitepaper, logo, blurb } = Astro.props;
+const logoAvif = logo.replace(/\.[^.]+$/, '.avif');
+const logoWebp = logo.replace(/\.[^.]+$/, '.webp');
 ---
 
 <article class="venture">
   <div class="venture-head">
-    <img src={logo} alt={`${name} logo`} class="venture-logo" width="36" height="36" loading="lazy">
+    <picture>
+      <source srcset={logoAvif} type="image/avif">
+      <source srcset={logoWebp} type="image/webp">
+      <img src={logo} alt={`${name} logo`} class="venture-logo" width="36" height="36" loading="lazy">
+    </picture>
     <a href={whitepaper} class="venture-name">{name}</a>
   </div>
   <p class="venture-blurb">{blurb}</p>

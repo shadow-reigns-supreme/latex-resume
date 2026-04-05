@@ -12,12 +12,18 @@ interface Props {
   platformUrl: string;
   tagline: string;
   path: string;
+  datePublished?: string;
+  showVisitLink?: boolean;
 }
 
-const { title, description, lang = 'en', logo, platformName, platformUrl, tagline, path } = Astro.props;
+const { title, description, lang = 'en', logo, platformName, platformUrl, tagline, path, datePublished, showVisitLink = true } = Astro.props;
 const year = new Date().getFullYear();
 const canonicalUrl = `https://raywinkelman.com${path}`;
 const fontUrl = 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap';
+
+// Always derive AVIF and WebP paths — all assets have been converted
+const logoAvif = logo.replace(/\.[^.]+$/, '.avif');
+const logoWebp = logo.replace(/\.[^.]+$/, '.webp');
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -44,6 +50,7 @@ const jsonLd = {
       "headline": title,
       "description": description,
       "url": canonicalUrl,
+      ...(datePublished ? { "datePublished": datePublished, "dateModified": datePublished } : {}),
       "author": {
         "@type": "Person",
         "name": "Ray Winkelman",
@@ -87,12 +94,20 @@ const jsonLd = {
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:image" content={`https://raywinkelman.com${logo}`}>
+  <meta property="og:image:width" content="64">
+  <meta property="og:image:height" content="64">
   <meta property="og:site_name" content="Ray Winkelman">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={`https://raywinkelman.com${logo}`}>
+
+  <link rel="alternate" hreflang="en" href={canonicalUrl}>
+  <link rel="alternate" hreflang="x-default" href={canonicalUrl}>
+
+  <!-- Preload LCP logo asset (AVIF) -->
+  <link rel="preload" as="image" href={logoAvif} type="image/avif" fetchpriority="high">
 
   <!-- Non-blocking font loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,13 +134,17 @@ const jsonLd = {
 
   <header class="wp-header reveal">
     <div class="wp-brand">
-      <img src={logo} alt={`${platformName} logo`} class="wp-logo" width="48" height="48">
+      <picture>
+        <source srcset={logoAvif} type="image/avif">
+        <source srcset={logoWebp} type="image/webp">
+        <img src={logo} alt={`${platformName} logo`} class="wp-logo" width="48" height="48" fetchpriority="high">
+      </picture>
       <div>
         <h1 class="wp-title">{platformName}</h1>
         <p class="wp-tagline">{tagline}</p>
       </div>
     </div>
-    <a href={platformUrl} class="wp-visit" rel="noopener noreferrer" target="_blank">Visit site</a>
+    {showVisitLink && <a href={platformUrl} class="wp-visit" rel="noopener noreferrer" target="_blank">Visit site</a>}
   </header>
 
   <main class="wp-body">

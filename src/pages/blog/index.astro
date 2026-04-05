@@ -1,6 +1,8 @@
 ---
 import Whitepaper from '../../layouts/Whitepaper.astro';
 
+export const prerender = true;
+
 type Post = { title: string; description: string; href: string; date: string; category: string };
 
 const PERMITTED_CATEGORIES = ['Tax', 'AEO', 'SEO', 'DabDash', 'Prepped', 'American Gun Trader', 'Guest Blog'];
@@ -35,7 +37,13 @@ try {
   });
   if (res.ok) {
     const data = await res.json();
-    if (Array.isArray(data)) dynamicPosts = data;
+    if (Array.isArray(data)) dynamicPosts = data.map((p: any) => ({
+      title: p.title,
+      description: p.excerpt,
+      href: `/blog/${p.slug}/`,
+      date: new Date(p.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+      category: p.category,
+    }));
   }
 } catch (_) {}
 
@@ -50,12 +58,13 @@ const posts = [...staticPosts, ...dynamicPosts];
   platformUrl="https://raywinkelman.com/blog/"
   tagline="Tech entrepreneurship, AEO/SEO, offshore tax, and travel"
   path="/blog/"
+  showVisitLink={false}
 >
 
 <nav class="cat-nav" aria-label="Filter by category">
-  <button class="cat-pill active" data-filter="All">All</button>
+  <button class="cat-pill active" data-filter="All" aria-pressed="true">All</button>
   {categories.map(cat => (
-    <button class="cat-pill" data-filter={cat}>{cat}</button>
+    <button class="cat-pill" data-filter={cat} aria-pressed="false">{cat}</button>
   ))}
 </nav>
 
@@ -79,9 +88,6 @@ const posts = [...staticPosts, ...dynamicPosts];
 </Whitepaper>
 
 <style>
-/* —— Hide "Visit Site" on blog index (links to itself) —— */
-.wp-visit { display: none; }
-
 /* —— Category nav —— */
 .cat-nav {
   display: flex;
@@ -195,8 +201,9 @@ const posts = [...staticPosts, ...dynamicPosts];
     pill.addEventListener('click', () => {
       const filter = pill.dataset.filter!;
 
-      pills.forEach(p => p.classList.remove('active'));
+      pills.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-pressed', 'false'); });
       pill.classList.add('active');
+      pill.setAttribute('aria-pressed', 'true');
 
       let visible = 0;
       items.forEach(item => {

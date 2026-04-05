@@ -125,6 +125,15 @@
   color: var(--text);
 }
 
+.wp-body a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.wp-body a:hover {
+  text-decoration-color: var(--accent);
+}
+
 .wp-body ul,
 .wp-body ol {
   margin-bottom: 1rem;

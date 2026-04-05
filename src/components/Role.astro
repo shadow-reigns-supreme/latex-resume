@@ -27,15 +27,23 @@ const { company, url, dissolved, dates, title, location, description, ventures }
   <p class="role-desc">{description}</p>
   {ventures && ventures.length > 0 && (
     <div class="role-ventures">
-      {ventures.map((v) => (
-        <div class="role-venture">
-          <img src={v.logo} alt={`${v.name} logo`} class="role-venture-logo" width="22" height="22" loading="lazy">
-          <div>
-            <a href={v.whitepaper} class="role-venture-name">{v.name}</a>
-            <span class="role-venture-blurb">{v.blurb}</span>
+      {ventures.map((v) => {
+        const logoAvif = v.logo.replace(/\.[^.]+$/, '.avif');
+        const logoWebp = v.logo.replace(/\.[^.]+$/, '.webp');
+        return (
+          <div class="role-venture">
+            <picture>
+              <source srcset={logoAvif} type="image/avif">
+              <source srcset={logoWebp} type="image/webp">
+              <img src={v.logo} alt={`${v.name} logo`} class="role-venture-logo" width="22" height="22" loading="lazy">
+            </picture>
+            <div>
+              <a href={v.whitepaper} class="role-venture-name">{v.name}</a>
+              <span class="role-venture-blurb">{v.blurb}</span>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   )}
 </article>

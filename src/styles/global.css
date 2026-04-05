@@ -411,6 +411,14 @@ a:hover {
   line-height: 1.5;
 }
 
+/* —— Image link focus outlines —— */
+a:has(> .venture-logo):focus-visible,
+a:has(> .role-venture-logo):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* —— Ventures —— */
 .ventures-context {
   font-size: 0.8125rem;
