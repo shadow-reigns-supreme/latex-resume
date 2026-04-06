@@ -21,9 +21,10 @@ interface Props {
   dateModified?: string;
   showVisitLink?: boolean;
   faqItems?: FaqItem[];
+  featuredImage?: string;
 }
 
-const { title, description, lang = 'en', logo, platformName, platformUrl, tagline, path, datePublished, dateModified, showVisitLink = true, faqItems } = Astro.props;
+const { title, description, lang = 'en', logo, platformName, platformUrl, tagline, path, datePublished, dateModified, showVisitLink = true, faqItems, featuredImage } = Astro.props;
 const year = new Date().getFullYear();
 const canonicalUrl = `https://raywinkelman.com${path}`;
 const fontUrl = 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap';
@@ -32,7 +33,29 @@ const fontUrl = 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400
 const logoAvif = logo.replace(/\.[^.]+$/, '.avif');
 const logoWebp = logo.replace(/\.[^.]+$/, '.webp');
 
+// Featured image paths (AVIF primary, WebP fallback)
+const featuredImageAvif = featuredImage ? featuredImage.replace(/\.[^.]+$/, '.avif') : null;
+const featuredImageWebp = featuredImage ? featuredImage.replace(/\.[^.]+$/, '.webp') : null;
+
+// LCP asset to preload — featured image takes priority over logo
+const lcpPreload = featuredImageAvif ?? logoAvif;
+const lcpPreloadType = 'image/avif';
+
+// OG/Twitter image — featured image (1200×630) or logo fallback
+const ogImage = featuredImage ? `https://raywinkelman.com${featuredImageAvif}` : `https://raywinkelman.com${logo}`;
+const ogImageWidth = featuredImage ? '1200' : '64';
+const ogImageHeight = featuredImage ? '630' : '64';
+
 const resolvedDateModified = dateModified ?? datePublished;
+
+const blogPostingImage = featuredImage
+  ? {
+      "@type": "ImageObject",
+      "url": `https://raywinkelman.com${featuredImageAvif}`,
+      "width": 1200,
+      "height": 630
+    }
+  : `https://raywinkelman.com${logo}`;
 
 const jsonLdGraph: object[] = [
   {
@@ -60,7 +83,7 @@ const jsonLdGraph: object[] = [
       "name": "Shadow Software LLC",
       "url": "https://raywinkelman.com"
     },
-    "image": `https://raywinkelman.com${logo}`,
+    "image": blogPostingImage,
     "mainEntityOfPage": canonicalUrl
   }
 ];
@@ -107,21 +130,21 @@ const jsonLd = { "@context": "https://schema.org", "@graph": jsonLdGraph };
   <meta property="og:url" content={canonicalUrl}>
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
-  <meta property="og:image" content={`https://raywinkelman.com${logo}`}>
-  <meta property="og:image:width" content="64">
-  <meta property="og:image:height" content="64">
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:image:width" content={ogImageWidth}>
+  <meta property="og:image:height" content={ogImageHeight}>
   <meta property="og:site_name" content="Ray Winkelman">
 
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content={featuredImage ? 'summary_large_image' : 'summary'}>
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content={`https://raywinkelman.com${logo}`}>
+  <meta name="twitter:image" content={ogImage}>
 
   <link rel="alternate" hreflang="en" href={canonicalUrl}>
   <link rel="alternate" hreflang="x-default" href={canonicalUrl}>
 
-  <!-- Preload LCP logo asset (AVIF) -->
-  <link rel="preload" as="image" href={logoAvif} type="image/avif" fetchpriority="high">
+  <!-- Preload LCP asset (AVIF) — featured image takes priority -->
+  <link rel="preload" as="image" href={lcpPreload} type={lcpPreloadType} fetchpriority="high">
 
   <!-- Non-blocking font loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,12 +186,31 @@ const jsonLd = { "@context": "https://schema.org", "@graph": jsonLdGraph };
     </button>
   </nav>
 
+  {featuredImageAvif && featuredImageWebp && featuredImage && (
+    <figure class="wp-hero reveal">
+      <picture>
+        <source srcset={featuredImageAvif} type="image/avif">
+        <source srcset={featuredImageWebp} type="image/webp">
+        <img
+          src={featuredImage}
+          alt={platformName}
+          width="1200"
+          height="630"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          onerror="this.closest('.wp-hero').hidden=true"
+        >
+      </picture>
+    </figure>
+  )}
+
   <header class="wp-header reveal">
     <div class="wp-brand">
       <picture>
         <source srcset={logoAvif} type="image/avif">
         <source srcset={logoWebp} type="image/webp">
-        <img src={logo} alt={`${platformName} logo`} class="wp-logo" width="48" height="48" fetchpriority="high">
+        <img src={logo} alt={`${platformName} logo`} class="wp-logo" width="48" height="48" fetchpriority={featuredImage ? 'low' : 'high'}>
       </picture>
       <div>
         <h1 class="wp-title">{platformName}</h1>

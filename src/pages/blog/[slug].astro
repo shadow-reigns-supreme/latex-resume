@@ -12,6 +12,7 @@ let post: {
   lang: string;
   slug: string;
   published_at: string;
+  image_url?: string;
 } | null = null;
 
 try {
@@ -41,6 +42,7 @@ const date = new Date(post.published_at).toLocaleDateString('en-US', { month: 'l
   path={`/blog/${post.slug}/`}
   datePublished={post.published_at}
   showVisitLink={false}
+  featuredImage={`/blog-img/${post.slug}.avif`}
 >
 
 <Fragment set:html={post.html} />

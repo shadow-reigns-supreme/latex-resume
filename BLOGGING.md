@@ -1,76 +1,61 @@
-# Blogging — Context & Guidelines
+# Blogging — Content Rules & Publishing Workflow
 
 ## Author Voice
 
-Ray Winkelman is a **full-time nomad** — no fixed home base, travels the world continuously. This is a core identity signal and must be reflected in every post. Never reference a home city, home country, or "returning home." The framing is always: moving between places, not leaving and coming back.
+Ray Winkelman is a **full-time nomad** — no fixed home base, moves continuously. Never reference a home city or "returning home."
 
-Ray is a **SaaS founder, not an employee**. He does not work for hire. All posts should reflect someone building his own platforms, not someone available for work.
+Ray is a **SaaS founder, not an employee**. He builds platforms, doesn't take jobs. All posts reflect someone running his own businesses.
 
-## Primary Topics (in order of priority)
+**Tone:** First-person, direct, no filler. Information-dense, never padded. No motivational language, no "hustle" framing.
 
-1. **Tech entrepreneurship** — building platforms, founding companies, lessons from Shadow Software LLC and its ventures (AmericanGunTrader, DabDash, OrderPrepped)
-2. **AEO/SEO** — answer engine optimization, search strategy, content architecture, AI search visibility
-3. **Offshore tax residencies & tax optimization** — perpetual traveler strategies, flag theory, territorial tax jurisdictions, legal structures for location-independent founders
-4. **Travel** — destination reviews, logistics, nomad infrastructure (accommodation, connectivity, banking); always framed through the lens of a working founder, not a leisure tourist
+---
 
-## Tone & Style
+## Topic Pillars (priority order)
 
-- First-person, direct, no filler — mirrors the resume's "quiet authority" aesthetic
-- Earned density: information-rich, never padded
-- No motivational language, no "hustle" framing
-- Links and CTAs are contextual, never bolted on
+1. **Tech entrepreneurship** — platform building, SaaS lessons, Shadow Software LLC and its ventures
+2. **AEO/SEO** — answer engine optimization, search strategy, AI search visibility
+3. **Offshore tax residencies** — flag theory, territorial tax, perpetual traveler strategies, legal structures
+4. **Travel** — destination reviews, nomad logistics; always through a working-founder lens, never leisure tourism
 
 ---
 
 ## AEO Content Rules
 
-These rules govern how posts are structured for AI engine citation. AI engines pull **answers, not pages** — structure is more important than word count.
+AI engines pull **answers, not pages** — structure is more important than word count.
 
-### 1. Answer-first: 50-word rule
+### 1. Answer-first (50-word rule)
+The first paragraph after the opening `h2` must contain a complete, standalone answer to the post's central question — within 50 words. This is the text AI engines extract.
 
-The first paragraph after the opening `h2` must contain a complete, standalone answer to the post's central question — within the first 50 words. This is the text AI engines extract when citing the post. If a reader sees only the first paragraph, they must have the answer.
-
-**Bad:** "In this post I'll explore the different banking options available to non-resident founders and look at what makes Mercury stand out from the crowd."
+**Bad:** "In this post I'll explore the different banking options available to non-resident founders..."
 
 **Good:** "If you run a US-incorporated SaaS business as a non-resident founder, Mercury is the correct banking choice. It works without a US address, without a Social Security Number, and without walking into a branch."
 
-### 2. H2 headings must be phrased as questions
-
-AI engines match user queries (questions) to headings (questions). Statement headings require the engine to translate; question headings eliminate that step and increase citation probability.
+### 2. H2 headings must be questions
+AI engines match user queries (questions) to headings (questions). Statement headings require the engine to translate; question headings eliminate that step.
 
 **Bad:** `<h2>Why Traditional Banks Fail Non-Residents</h2>`
 
 **Good:** `<h2>Why do traditional US banks reject non-resident founders?</h2>`
 
-The sole exceptions are the opening section heading and "Verdict" / closing sections, which can remain statement form.
+**Exceptions:** the opening section heading and "Verdict" / closing sections may be statement form.
 
-### 3. Every post must end with an FAQ section
+### 3. FAQ section required on every post
+A `wp-faq` block with 3–5 Q&As closes every post, placed after "Verdict" and before `wp-trademark`. Questions must match how someone would ask an AI engine. Answers must be 2–4 sentences, complete and standalone — never reference "as mentioned above."
 
-A `wp-faq` block with 3–5 Q&As closes every post, placed after "Verdict" and before `wp-trademark`. Questions must match how someone would ask an AI engine about the topic. Answers must be complete in 2–4 sentences — don't reference "as mentioned above." Each answer must stand alone.
+### 4. Comparison table for any X-vs-Y post
+Any post comparing tools, jurisdictions, platforms, or options must include a `wp-table`. This is the highest-cited format in AI answers.
 
-This is the highest-value AEO element on the page. See the `wp-faq` component documentation below.
-
-### 4. Use comparison tables for any post comparing options
-
-Comparison tables are the highest-cited format in AI answers — engines parse rows as factual claims. Any post that compares tools, jurisdictions, platforms, or options must include a `wp-table`. See documentation below.
-
-### 5. Internal links to related posts are required
-
-Every post must link to at least one other post on the blog where the topic overlaps. This builds topical authority clusters that AI engines use to assess entity credibility.
-
-- Mercury post → link to Thai bank post
-- Iceland hosting → link to offshore tax post
-- DabDash Thailand → link back to DabDash.com and the Thai regulatory post
+### 5. Internal links required
+Every post must link to at least one other post where topics overlap.
 
 ---
 
-## Layout Components
+## Components Reference
 
-Every post uses `src/layouts/Whitepaper.astro`. The following components are available inside the `<Whitepaper>` slot.
+All components are CSS classes applied to plain HTML — no Astro syntax in post content.
 
 ### Stats Bar — `wp-stats`
-
-The standout component. Use it near the top of any post that has measurable outcomes, ratings, or key numbers. Renders as a ruled row of bold values with uppercase labels.
+Required on every post. Key metrics rendered as a ruled row. If the post lacks obvious numbers, find an angle: timeline, count, rate, or rating.
 
 ```html
 <div class="wp-stats">
@@ -79,106 +64,49 @@ The standout component. Use it near the top of any post that has measurable outc
     <span class="wp-stat-label">Overall Rating</span>
   </div>
   <div>
-    <span class="wp-stat-value">Staff</span>
-    <span class="wp-stat-label">Standout Category</span>
+    <span class="wp-stat-value">$0</span>
+    <span class="wp-stat-label">Monthly Fee</span>
   </div>
   <div>
-    <span class="wp-stat-value">Direct</span>
-    <span class="wp-stat-label">Booked via krabigaruda.com</span>
+    <span class="wp-stat-value">Online</span>
+    <span class="wp-stat-label">Application</span>
   </div>
 </div>
 ```
 
-**Use for:** review scores, key metrics, savings amounts, comparison numbers, launch stats, tax rates.
-
-**Every post needs one.** If a post doesn't have obvious numbers, find a meaningful angle — a timeline (e.g. "3 Years"), a count (e.g. "3,000 Shops"), a rate (e.g. "40% Per Year"), or a rating (e.g. "5 / 5"). There is always an angle.
-
----
-
 ### Section Headings — `h2`, `h3`
-
-`h2` renders as a small-caps uppercase label with an animated underline. `h3` is a bold inline subheading. Use `h2` for major sections, `h3` for sub-points within a section.
-
-**AEO rule: phrase `h2` headings as questions** — they become citation anchors for AI engines. Exceptions: opening heading and "Verdict."
-
-```html
-<h2>Why do traditional US banks reject non-resident founders?</h2>
-<p>Answer goes here in the first sentence...</p>
-
-<h3>How to configure auto-transfer rules</h3>
-<p>...</p>
-```
-
----
+`h2` renders small-caps uppercase with an animated underline. Use for major sections — phrase as questions. `h3` is a bold inline subheading — statement form OK.
 
 ### Tag Chips — `wp-tech`
-
-Use for listing technologies, jurisdictions, platforms, tools, or any set of short categorical labels.
+Short categorical labels: tech stacks, jurisdictions, platforms, countries.
 
 ```html
 <div class="wp-tech">
   <span>Panama</span>
-  <span>Georgia</span>
-  <span>UAE</span>
-  <span>Paraguay</span>
   <span>Flag Theory</span>
+  <span>Territorial Tax</span>
 </div>
 ```
 
-**Use for:** tax jurisdictions, tech stacks, platforms compared, countries visited, tools reviewed.
-
----
-
 ### Comparison Table — `wp-table`
-
-Use whenever comparing two or more options side-by-side. This is the highest-cited format in AI answers — engines parse table rows as structured facts. Required for any "X vs Y" or "best options for Z" post.
+Required for any post comparing options. Highest-cited format in AI answers.
 
 ```html
 <div class="wp-table">
   <table>
     <thead>
-      <tr>
-        <th>Option</th>
-        <th>Non-Resident OK</th>
-        <th>Monthly Fee</th>
-        <th>Multi-Currency</th>
-        <th>Verdict</th>
-      </tr>
+      <tr><th>Option</th><th>Non-Resident OK</th><th>Monthly Fee</th><th>Verdict</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td><strong>Mercury</strong></td>
-        <td>Yes</td>
-        <td>$0</td>
-        <td>No (USD only)</td>
-        <td>Best for US entity banking</td>
-      </tr>
-      <tr>
-        <td><strong>Wise Business</strong></td>
-        <td>Yes</td>
-        <td>Variable</td>
-        <td>Yes</td>
-        <td>Best for multi-currency ops</td>
-      </tr>
-      <tr>
-        <td><strong>Chase</strong></td>
-        <td>No</td>
-        <td>$15–$95</td>
-        <td>No</td>
-        <td>Avoid — branch visit required</td>
-      </tr>
+      <tr><td><strong>Mercury</strong></td><td>Yes</td><td>$0</td><td>Best for US entity banking</td></tr>
+      <tr><td><strong>Chase</strong></td><td>No</td><td>$15–$95</td><td>Avoid — branch required</td></tr>
     </tbody>
   </table>
 </div>
 ```
 
-**Use for:** tool comparisons, jurisdiction comparisons, product feature comparisons, pricing comparisons.
-
----
-
 ### FAQ Section — `wp-faq`
-
-Required on every post. Place after "Verdict," before `wp-trademark`. Questions must be phrased exactly as a user would type them into an AI engine. Answers must be self-contained — no "as mentioned above."
+Required on every post. After "Verdict," before `wp-trademark`.
 
 ```html
 <section class="wp-faq">
@@ -186,48 +114,25 @@ Required on every post. Place after "Verdict," before `wp-trademark`. Questions 
 
   <div class="wp-faq-item">
     <h3>Can a non-resident open a Mercury bank account?</h3>
-    <p>Yes. Mercury accepts non-resident founders who have a US-registered business entity (LLC or C-Corp) and an EIN. No US address, SSN, or branch visit is required. The application is fully online.</p>
+    <p>Yes. Mercury accepts non-resident founders with a US-registered business entity (LLC or C-Corp) and an EIN. No US address, SSN, or branch visit required. The application is fully online.</p>
   </div>
 
   <div class="wp-faq-item">
     <h3>Does Mercury require a Social Security Number?</h3>
-    <p>No. Mercury does not require an SSN from the account holder. It requires a US EIN for the business entity and standard business documentation. This is the key reason it works for non-resident founders when traditional banks don't.</p>
+    <p>No. Mercury requires a US EIN for the business entity, not an SSN from the account holder. This is why it works for non-resident founders when traditional banks don't.</p>
   </div>
 
   <div class="wp-faq-item">
     <h3>What are Mercury auto-transfer rules?</h3>
-    <p>Mercury auto-transfer rules automatically sweep funds between your operating account and Mercury Treasury (a money market fund) based on balance thresholds you define. When your checking balance exceeds the ceiling, excess is swept to Treasury. When it drops below the floor, it pulls back automatically.</p>
+    <p>Mercury auto-transfer rules sweep funds between your operating account and Mercury Treasury based on balance thresholds you define. When your balance exceeds the ceiling, excess sweeps to Treasury. When it drops below the floor, it pulls back automatically.</p>
   </div>
 </section>
 ```
 
-**Rules for FAQ questions:**
-- Write questions exactly as a user would type them into ChatGPT or Perplexity
-- 3 questions minimum, 5 maximum per post
-- Each answer: 2–4 sentences, complete and standalone
-- Cover the post's primary query, the most common objection, and at least one "how to" or "what is" question
+**FAQ rules:** 3 minimum, 5 maximum. Cover the primary query, the most common objection, and at least one "how to" or "what is." Every answer stands alone.
 
----
-
-### Body Copy — `p`, `ul`, `ol`, `strong`
-
-Standard prose. `strong` is `font-weight: 600` — use it for key terms, not emphasis. Lists are clean and tight. Keep paragraphs short (3–5 sentences max).
-
-```html
-<p>The direct booking rate matched what I found on two major OTAs — <strong>no premium for cutting out the middleman.</strong></p>
-
-<ul>
-  <li>No third-party fees</li>
-  <li>Confirmation within minutes</li>
-  <li>Direct contact with the property</li>
-</ul>
-```
-
----
-
-### Disclosure / Footer Note — `wp-trademark`
-
-Use at the bottom of any post that warrants a disclosure, source note, or legal caveat. Renders in small muted text above a top rule.
+### Disclosure — `wp-trademark`
+Use at the bottom of posts that warrant a disclosure or legal caveat.
 
 ```html
 <p class="wp-trademark">This review reflects a personal stay booked independently. No compensation was received.</p>
@@ -235,62 +140,35 @@ Use at the bottom of any post that warrants a disclosure, source note, or legal 
 
 ---
 
-## Full Post Template
+## Full Post HTML Template
 
-```astro
----
-import Whitepaper from '../../layouts/Whitepaper.astro';
+The `html` DB column contains **inner body HTML only** — everything that goes inside the `<Whitepaper>` slot. No `<html>`, `<head>`, `<body>`. No Astro syntax.
 
-export const prerender = true;
----
+```html
+<!-- Opening: answer-first, 50-word rule on first paragraph -->
+<h2>Opening Heading (statement form OK here)</h2>
 
-<Whitepaper
-  title="[Full post title — appears in <head> and SEO]"
-  description="[155-char meta description — lead with the answer, not the topic]"
-  logo="/ray.png"
-  platformName="[Post title — this becomes the visible H1]"
-  platformUrl="https://raywinkelman.com/blog/"
-  tagline="[Category] · [Month Year]"
-  path="/blog/[slug]/"
-  datePublished="YYYY-MM-DD"
-  showVisitLink={false}
->
-
-<!-- Opening: answer-first, 50-word rule applies to first paragraph -->
-<h2>The Direct Answer</h2>
-
-<p>Lead paragraph. First sentence IS the extractable answer. Complete and standalone within 50 words. No throat-clearing, no "in this post I will..."</p>
+<p>First sentence IS the extractable answer. Complete and standalone within 50 words. No throat-clearing.</p>
 
 <div class="wp-stats">
-  <div>
-    <span class="wp-stat-value">Key Value</span>
-    <span class="wp-stat-label">What It Measures</span>
-  </div>
-  <div>
-    <span class="wp-stat-value">Key Value</span>
-    <span class="wp-stat-label">What It Measures</span>
-  </div>
-  <div>
-    <span class="wp-stat-value">Key Value</span>
-    <span class="wp-stat-label">What It Measures</span>
-  </div>
+  <div><span class="wp-stat-value">Value</span><span class="wp-stat-label">Label</span></div>
+  <div><span class="wp-stat-value">Value</span><span class="wp-stat-label">Label</span></div>
+  <div><span class="wp-stat-value">Value</span><span class="wp-stat-label">Label</span></div>
 </div>
 
-<!-- Body sections: H2 headings as questions -->
+<!-- Body: H2 headings as questions -->
 <h2>Why does [topic] matter for [audience]?</h2>
 
 <p>Answer in first sentence...</p>
 
-<h3>Subsection heading (statement ok at h3)</h3>
+<h3>Subsection heading (statement OK at h3)</h3>
 
 <p>...</p>
 
-<!-- Comparison table if comparing options -->
+<!-- Comparison table if post compares options -->
 <div class="wp-table">
   <table>
-    <thead>
-      <tr><th>Option</th><th>Key Factor</th><th>Verdict</th></tr>
-    </thead>
+    <thead><tr><th>Option</th><th>Key Factor</th><th>Verdict</th></tr></thead>
     <tbody>
       <tr><td><strong>Option A</strong></td><td>Value</td><td>Best for X</td></tr>
       <tr><td><strong>Option B</strong></td><td>Value</td><td>Best for Y</td></tr>
@@ -301,30 +179,26 @@ export const prerender = true;
 <div class="wp-tech">
   <span>Tag One</span>
   <span>Tag Two</span>
-  <span>Tag Three</span>
 </div>
 
-<!-- Internal link to related post — required -->
+<!-- Internal link — required -->
 <p>Related: <a href="/blog/[related-slug]/">[Related post title]</a></p>
 
 <h2>Verdict</h2>
 
 <p>Closing paragraph. Direct, no summary padding.</p>
 
-<!-- FAQ section — required, after Verdict -->
+<!-- FAQ — required, after Verdict -->
 <section class="wp-faq">
   <h2>Frequently Asked Questions</h2>
-
   <div class="wp-faq-item">
-    <h3>[Question phrased as user would type into ChatGPT]?</h3>
+    <h3>[Question as a user would type it into ChatGPT]?</h3>
     <p>Complete standalone answer in 2–4 sentences.</p>
   </div>
-
   <div class="wp-faq-item">
     <h3>[Second question]?</h3>
     <p>Complete standalone answer.</p>
   </div>
-
   <div class="wp-faq-item">
     <h3>[Third question]?</h3>
     <p>Complete standalone answer.</p>
@@ -332,15 +206,13 @@ export const prerender = true;
 </section>
 
 <p class="wp-trademark">Disclosure line if applicable.</p>
-
-</Whitepaper>
 ```
 
 ---
 
 ## Permitted Categories
 
-Every post must be assigned exactly one of these categories:
+Exactly one per post:
 
 | Category | Use for |
 |---|---|
@@ -348,83 +220,66 @@ Every post must be assigned exactly one of these categories:
 | `AEO` | Answer engine optimization, AI search visibility, prompt-based discovery |
 | `SEO` | Search strategy, content architecture, technical SEO, link building |
 | `Banking` | Non-resident banking, offshore accounts, fintech tools, asset protection |
-| `DabDash` | DabDash.com platform updates, cannabis delivery market, SaaS |
+| `DabDash` | DabDash.com updates, cannabis delivery market, SaaS |
 | `Prepped` | OrderPrepped.com updates, food/catering industry, meal prep |
 | `American Gun Trader` | AmericanGunTrader.com updates, firearms market, P2P marketplace |
-| `Guest Blog` | First-person reviews, travel write-ups, and SEO backlink placements |
+| `Guest Blog` | First-person reviews, travel write-ups, SEO backlink placements |
 
-Categories are fetched from `https://n8n.americanguntrader.com/webhook/67a78c43-734d-407a-9bfe-da21cca71d34` at runtime and fall back to the hardcoded list above.
+`Guest Blog` posts are hidden from the blog index by default — only shown when the "Guest Blog" filter pill is clicked.
 
 ---
 
-## SEO Backlink Posts
+## Guest Blog / Backlink Posts
 
-Posts written to place backlinks for partner/client sites should:
+Posts written for SEO backlinks should:
 - Read as genuine first-hand experience — not advertorial
-- Use the `wp-stats` bar to show ratings/scores near the top — this is the signal that makes the post credible
-- Anchor text must be natural within the sentence
-- Disclosure line at the bottom using `wp-trademark`
+- Use `wp-stats` near the top to show ratings/scores (makes the post credible)
+- Use natural anchor text within the sentence
+- Include a disclosure at the bottom using `wp-trademark`
 - Category: `Guest Blog`
 
 ---
 
-## Technical Setup — Publishing Posts
+## Publishing Workflow
 
-### All blog posts are published via the MCP tool (`mcp__n8n-raywinkelman__Upsert`)
+All posts are published via the `/blog` skill (`.claude/commands/blog.md`). The full steps are there. Summary:
 
-This inserts/updates a row in the `rays_blogs` MySQL table. Posts are served dynamically via `src/pages/blog/[slug].astro`, which fetches from the n8n webhook and renders `post.html` through `Whitepaper.astro`.
+### 1. Write the post
+HTML only — the inner body template above. Determine the `slug` (lowercase, hyphenated, no slashes).
 
-**Never create static `.astro` files for regular blog posts.** Static `.astro` files shadow the dynamic `[slug]` route, breaking the MCP workflow.
+### 2. Fetch + process featured image
+Every post requires a featured image. Call `GetFeaturedImage` MCP with the primary keyword and `"landscape"` orientation. Process to exactly **1200×630 px** as AVIF + WebP:
 
-#### MCP field mapping
+```bash
+magick input.jpg -resize 1200x630^ -gravity Center -extent 1200x630 -strip -quality 80 public/blog-img/{slug}.avif
+magick input.jpg -resize 1200x630^ -gravity Center -extent 1200x630 -strip -quality 82 public/blog-img/{slug}.webp
+```
 
-| MCP parameter | DB column | Notes |
-|---|---|---|
-| `Value_of_Column_to_Match_On` | `id` | Pass empty string for new posts (triggers INSERT with auto-increment) |
-| `values0_Value` | `title` | Full post title |
-| `values1_Value` | `excerpt` | 155-char meta description — lead with the answer |
-| `values2_Value` | `html` | Full inner body HTML (see below) |
-| `values3_Value` | `category` | One of the permitted categories |
-| `values4_Value` | `tags_csv` | Comma-separated tags |
-| `values5_Value` | `keyword` | Primary target keyword |
-| `values7_Value` | `slug` | URL slug — no trailing slash, no leading slash |
+Filename must match slug exactly. Both files must exist before publishing.
 
-#### What goes in the `html` field
+### 3. Publish via MCP Upsert
 
-The `html` column contains **everything that would go inside the `<Whitepaper>` slot** — the inner body HTML only. No `<html>`, `<head>`, `<body>` tags. No Astro component syntax.
+See `CLAUDE.md` for the full field mapping table. Key points:
+- `Value_of_Column_to_Match_On`: empty string for new posts
+- `values2_Value`: the inner body HTML only
+- `values8_Value`: `/blog-img/{slug}.avif`
+- Never pass an empty string for any field you want to preserve (`replaceEmptyStrings: true` destroys content)
 
-Include all AEO components inline:
-- `<div class="wp-stats">` — key metrics bar
-- `<h2>` headings as questions (e.g. "Why does X happen?")
-- `<div class="wp-table"><table>...</table></div>` — comparison tables
-- `<div class="wp-tech">` — tag chips
-- `<section class="wp-faq">` — FAQ section (required, renders visually; FAQPage schema is a future enhancement)
-- `<p class="wp-trademark">` — disclosure if needed
-
-The `[slug].astro` route passes `title`, `excerpt`, `category`, and `published_at` to the Whitepaper layout automatically. The `html` field is the slot content only.
-
-#### After publishing via MCP
-
-No sitemap or index changes needed — dynamic posts appear automatically in the blog index via the webhook fetch.
-
----
+Posts appear at `/blog/{slug}/` immediately after upsert — no rebuild needed.
 
 ### Static `.astro` files
-
-Static files are reserved exclusively for non-post pages: `src/pages/blog/index.astro` (the blog index) and venture whitepapers (`/americanguntrader/`, `/dabdash/`, `/orderprepped/`).
-
-**No blog post should ever be a static `.astro` file.** All posts live in the DB and are served dynamically.
+Reserved exclusively for `src/pages/blog/index.astro` and the three venture whitepapers. **No blog post should ever be a static `.astro` file.**
 
 ---
 
 ## What NOT to Write
 
-- No fixed-location references (no "back home in X", no city as a base)
-- No employment framing (not available for hire, not an employee)
-- No generic lifestyle content unrelated to the four topic pillars
-- No developer-portfolio aesthetic (terminal vibes, tutorial listicles)
-- No unsolicited opinions on tools/frameworks without a clear business angle
-- No plain-prose-only posts — always use at least one `wp-stats` bar or `wp-tech` chip row
-- No posts without a `wp-faq` section (required for AEO)
-- No statement-format `h2` headings on body sections (use question format)
-- No posts that compare options without a `wp-table`
+- Fixed-location references ("back home in X", a city as a base)
+- Employment framing (not available for hire, not an employee)
+- Generic lifestyle content outside the four topic pillars
+- Developer-portfolio aesthetic (terminal vibes, tutorial listicles)
+- Unsolicited opinions on tools/frameworks without a clear business angle
+- Plain-prose-only posts — every post needs at least one `wp-stats` or `wp-tech`
+- Posts without a `wp-faq` section
+- Statement-format `h2` headings on body sections (use question format)
+- Posts that compare options without a `wp-table`
