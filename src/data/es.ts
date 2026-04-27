@@ -16,8 +16,8 @@ export const es: ResumeData = {
     print: 'Imprimir',
     langNav: 'Idioma',
   },
-  synopsis: 'Emprendedor y ejecutivo de software. Fundador y CEO de Shadow Software LLC. Especialista en optimización fiscal offshore, consultor SEO/AEO, y creador de plataformas en los sectores de armas, cannabis y alimentación.',
-  synopsisHtml: 'Emprendedor y ejecutivo de software. Fundador y CEO de <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">Shadow Software LLC</a>. Especialista en optimización fiscal offshore, consultor SEO/AEO, y creador de plataformas en los sectores de armas, cannabis y alimentación.',
+  synopsis: `Ejecutivo de software senior con ${new Date().getFullYear() - 2013}+ años de destacada experiencia en la industria. Fundador de ShadowSoftware.com, AmericanGunTrader.com™ y DabDash.com.`,
+  synopsisHtml: `Ejecutivo de software senior con ${new Date().getFullYear() - 2013}+ años de destacada experiencia en la industria. Fundador de <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">ShadowSoftware.com</a>, <a href="/americanguntrader/">AmericanGunTrader.com™</a> y <a href="/dabdash/">DabDash.com</a>.`,
   venturesContext: 'Construidos y escalados a través de Shadow Software LLC.',
   ventures: [
     {

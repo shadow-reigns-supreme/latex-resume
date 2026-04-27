@@ -88,6 +88,32 @@ Short categorical labels: tech stacks, jurisdictions, platforms, countries.
 </div>
 ```
 
+### Code Block — `wp-code`
+Syntax-highlighted code block. Always use when showing shell commands, config file contents, or any multi-line code. Uses GitHub Dark palette — dark background in both light and dark modes.
+
+Set `data-lang` to the language label (e.g., `bash`, `ini`, `conf`, `nginx`, `python`). Omit `data-lang` for unlabeled blocks.
+
+For inline config values within prose, use a plain `<code>` tag.
+
+```html
+<div class="wp-code" data-lang="bash">
+  <pre><code>hostnamectl set-hostname DESKTOP-A3KF9Z2X
+systemctl restart NetworkManager</code></pre>
+</div>
+```
+
+```html
+<div class="wp-code" data-lang="ini">
+  <pre><code>[device]
+wifi.scan-rand-mac-address=yes
+
+[connection]
+wifi.cloned-mac-address=random
+ethernet.cloned-mac-address=random
+ipv4.dhcp-send-hostname=no</code></pre>
+</div>
+```
+
 ### Comparison Table — `wp-table`
 Required for any post comparing options. Highest-cited format in AI answers.
 

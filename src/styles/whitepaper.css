@@ -27,6 +27,13 @@
   transform: scale(1.08);
 }
 
+.wp-logo[src*="dabdash"],
+.wp-logo[src*="prepped"] {
+  background: #000;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
 .wp-title {
   font-size: clamp(1.5rem, 5vw, 2.25rem);
   font-weight: 700;
@@ -280,6 +287,55 @@
 .wp-table td strong {
   color: var(--text);
 }
+
+/* —— Code Block —— */
+.wp-code {
+  position: relative;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--rule) 70%, transparent);
+  background: #0d1117;
+  overflow: hidden;
+}
+
+.wp-code[data-lang]::before {
+  content: attr(data-lang);
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8b949e;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+}
+
+.wp-code pre {
+  margin: 0;
+  padding: 1.125rem 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wp-code code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: #e6edf3;
+  white-space: pre;
+  display: block;
+}
+
+/* Syntax token colors — GitHub Dark palette */
+.wp-code .tok-comment  { color: #8b949e; font-style: italic; }
+.wp-code .tok-keyword  { color: #ff7b72; }
+.wp-code .tok-string   { color: #a5d6ff; }
+.wp-code .tok-number   { color: #79c0ff; }
+.wp-code .tok-operator { color: #ff7b72; }
+.wp-code .tok-variable { color: #ffa657; }
+.wp-code .tok-function { color: #d2a8ff; }
+.wp-code .tok-param    { color: #e6edf3; }
 
 /* —— FAQ Section —— */
 .wp-faq {

@@ -60,6 +60,32 @@ html[data-theme="dark"] {
   color-scheme: dark;
 }
 
+/* —— Navigation progress bar —— */
+#nav-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  z-index: 9999;
+  opacity: 0;
+  transition: width 0.1s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#nav-progress.started {
+  opacity: 1;
+  transition: width 3s cubic-bezier(0.1, 0.05, 0, 1), opacity 0.1s ease;
+  width: 85%;
+}
+
+#nav-progress.done {
+  width: 100%;
+  opacity: 0;
+  transition: width 0.15s ease, opacity 0.3s ease 0.15s;
+}
+
 /* —— View Transitions —— */
 ::view-transition-old(root) {
   animation-duration: 0.15s;
@@ -252,6 +278,91 @@ a:hover {
   pointer-events: none;
 }
 
+/* —— Language dropdown —— */
+.lang-drop {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-drop-btn {
+  appearance: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  transition: color 0.18s ease;
+}
+
+.lang-drop-btn:hover,
+.lang-drop-btn:focus-visible {
+  color: var(--text);
+  outline: none;
+}
+
+.lang-flag {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.lang-chevron {
+  color: var(--rule);
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.lang-drop[data-open] .lang-chevron {
+  transform: rotate(180deg);
+  color: var(--text-muted);
+}
+
+.lang-drop-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  min-width: 6rem;
+  z-index: 20;
+}
+
+.lang-drop[data-open] .lang-drop-menu {
+  display: block;
+}
+
+.lang-drop-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.35rem 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.lang-drop-menu li[aria-selected="true"] a {
+  color: var(--text);
+}
+
+.lang-drop-menu li a:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--rule) 40%, transparent);
+}
+
+/* —— Theme toggle —— */
 .theme-toggle {
   background: none;
   border: none;
@@ -425,6 +536,13 @@ html[data-theme="dark"]  .theme-toggle .icon-moon { display: none; }
   transform: scale(1.12);
 }
 
+.role-venture-logo[src*="dabdash"],
+.role-venture-logo[src*="prepped"] {
+  background: #000;
+  padding: 3px;
+  box-sizing: border-box;
+}
+
 .role-venture-name {
   font-size: 0.8125rem;
   font-weight: 600;
@@ -523,6 +641,14 @@ a:has(> .role-venture-logo):focus-visible {
   flex-shrink: 0;
   object-fit: contain;
   border-radius: 5px;
+}
+
+.venture-logo[src*="dabdash"],
+.venture-logo[src*="prepped"] {
+  width: 36px;
+  background: #000;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .venture-name {

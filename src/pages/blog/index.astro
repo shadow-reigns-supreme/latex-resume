@@ -1,5 +1,6 @@
 ---
 import Whitepaper from '../../layouts/Whitepaper.astro';
+import ShadowSoftwarePromo from '../../components/ShadowSoftwarePromo.astro';
 
 export const prerender = true;
 
@@ -55,6 +56,8 @@ const posts = [...dynamicPosts, ...staticPosts];
   path="/blog/"
   showVisitLink={false}
 >
+
+<ShadowSoftwarePromo />
 
 <nav class="cat-nav" aria-label="Filter by category">
   <button class="cat-pill active" data-filter="All" aria-pressed="true">All</button>

@@ -4,8 +4,9 @@ import type { ResumeData } from '../data/types';
 import Role from '../components/Role.astro';
 import Edu from '../components/Edu.astro';
 import Venture from '../components/Venture.astro';
+import ShadowSoftwarePromo from '../components/ShadowSoftwarePromo.astro';
+import TopNav from '../components/TopNav.astro';
 import '../styles/global.css';
-import '../styles/ss-promo.css';
 
 interface Props {
   data: ResumeData;
@@ -163,7 +164,7 @@ const jsonLd = currentLang === 'en' ? {
 <head>
   <script is:inline>
     document.documentElement.classList.add('js');
-    (function(){const t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();
+    (function(){const t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');})();
   </script>
   <ClientRouter />
   <meta charset="UTF-8">
@@ -232,34 +233,8 @@ const jsonLd = currentLang === 'en' ? {
 </head>
 <body>
 
-  <nav class="top-nav" aria-label={data.labels.langNav}>
-    <a href="/" aria-current={currentLang === 'en' ? 'page' : undefined} hreflang="en">EN</a>
-    <span class="nav-sep" aria-hidden="true">/</span>
-    <a href="/es/" aria-current={currentLang === 'es' ? 'page' : undefined} hreflang="es">ES</a>
-    <span class="nav-sep" aria-hidden="true">/</span>
-    <a href="/th/" aria-current={currentLang === 'th' ? 'page' : undefined} hreflang="th">TH</a>
-    <span class="nav-sep" aria-hidden="true">/</span>
-    <a href="/blog/">Blog</a>
-    <span class="nav-sep" aria-hidden="true">/</span>
-    <button class="theme-toggle" type="button" aria-label="Toggle theme">
-      <!-- Sun: click to switch to light -->
-      <svg class="icon-sun" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-        <circle cx="6.5" cy="6.5" r="2.25"/>
-        <line x1="6.5" y1="0.5" x2="6.5" y2="1.75"/>
-        <line x1="6.5" y1="11.25" x2="6.5" y2="12.5"/>
-        <line x1="0.5" y1="6.5" x2="1.75" y2="6.5"/>
-        <line x1="11.25" y1="6.5" x2="12.5" y2="6.5"/>
-        <line x1="2.4" y1="2.4" x2="3.3" y2="3.3"/>
-        <line x1="9.7" y1="9.7" x2="10.6" y2="10.6"/>
-        <line x1="10.6" y1="2.4" x2="9.7" y2="3.3"/>
-        <line x1="3.3" y1="9.7" x2="2.4" y2="10.6"/>
-      </svg>
-      <!-- Moon: click to switch to dark -->
-      <svg class="icon-moon" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M10.5 8A5 5 0 0 1 5 2.5a5 5 0 1 0 5.5 5.5z"/>
-      </svg>
-    </button>
-  </nav>
+  <div id="nav-progress" aria-hidden="true"></div>
+  <TopNav currentPath={canonicalPath} currentLang={currentLang} />
 
   <header class="site-header">
     <h1 class="name">Ray Winkelman</h1>
@@ -277,9 +252,9 @@ const jsonLd = currentLang === 'en' ? {
       <h2 class="section-label">{data.labels.synopsis}</h2>
       <div class="synopsis-wrap">
         <picture>
-          <source srcset="/ray.avif" type="image/avif">
-          <source srcset="/ray.webp" type="image/webp">
-          <img src="/ray.png" alt="Ray Winkelman" class="headshot" width="72" height="72" loading="lazy">
+          <source srcset="/ray-2.avif" type="image/avif">
+          <source srcset="/ray-2.webp" type="image/webp">
+          <img src="/ray-2.webp" alt="Ray Winkelman" class="headshot" width="72" height="72" loading="lazy">
         </picture>
         {data.synopsisHtml ? <p set:html={data.synopsisHtml} /> : <p>{data.synopsis}</p>}
       </div>
@@ -311,30 +286,7 @@ const jsonLd = currentLang === 'en' ? {
 
   </main>
 
-  <aside class="ss-promo reveal" aria-label="Sponsored — Shadow Software LLC">
-    <div class="ss-promo-inner">
-      <div class="ss-promo-brand">
-        <img src="/logos/shadow-software.webp" alt="Shadow Software LLC" class="ss-promo-logo" width="32" height="32">
-        <span class="ss-promo-sponsor">Shadow Software LLC</span>
-      </div>
-      <p class="ss-promo-eyebrow">You found this article through search — that's not an accident.</p>
-      <h2 class="ss-promo-heading">We build <em>search visibility</em> for serious brands.</h2>
-      <p class="ss-promo-body">SEO &amp; AEO services that get your business in front of people the moment they're asking the right questions — in Google, and in AI.</p>
-      <div class="ss-promo-pills">
-        <span class="ss-promo-pill">Technical SEO</span>
-        <span class="ss-promo-pill">Answer Engine Optimization</span>
-        <span class="ss-promo-pill">Content Strategy</span>
-        <span class="ss-promo-pill">AI Search Visibility</span>
-      </div>
-      <a href="https://shadowsoftware.com/services/seo" class="ss-promo-cta" target="_blank" rel="noopener noreferrer sponsored">
-        Get found like this
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="2" y1="7" x2="12" y2="7"/>
-          <polyline points="8 3 12 7 8 11"/>
-        </svg>
-      </a>
-    </div>
-  </aside>
+  <ShadowSoftwarePromo />
 
   <footer class="site-footer reveal">
     <span>&copy; {year} Ray Winkelman &middot; <a href="/blog/">Blog</a></span>

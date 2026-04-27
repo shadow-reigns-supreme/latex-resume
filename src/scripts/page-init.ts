@@ -6,8 +6,39 @@
 // Restore theme from localStorage immediately after DOM swap (prevents flash)
 document.addEventListener('astro:after-swap', () => {
   const t = localStorage.getItem('theme');
-  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
 });
+
+// Navigation progress bar
+(function initProgressBar() {
+  let doneTimer: ReturnType<typeof setTimeout> | null = null;
+
+  const getBar = () => document.getElementById('nav-progress');
+
+  const start = () => {
+    const bar = getBar();
+    if (!bar) return;
+    if (doneTimer) { clearTimeout(doneTimer); doneTimer = null; }
+    bar.classList.remove('done');
+    // Force reflow so the transition fires fresh even if bar was mid-animation
+    bar.getBoundingClientRect();
+    bar.classList.add('started');
+  };
+
+  const finish = () => {
+    const bar = getBar();
+    if (!bar) return;
+    bar.classList.remove('started');
+    bar.classList.add('done');
+    doneTimer = setTimeout(() => {
+      bar.classList.remove('done');
+      doneTimer = null;
+    }, 500);
+  };
+
+  document.addEventListener('astro:before-preparation', start);
+  document.addEventListener('astro:page-load', finish);
+})();
 
 // Nav scroll backdrop — single persistent listener, queries DOM dynamically
 window.addEventListener('scroll', () => {
@@ -23,6 +54,7 @@ if ('serviceWorker' in navigator && !['localhost', '127.0.0.1'].includes(locatio
 document.addEventListener('astro:page-load', () => {
   initUTM();
   initThemeToggle();
+  initLangSelect();
   initPrintButton();
   initEmailReveal();
   initNameSplit();
@@ -54,6 +86,30 @@ function initThemeToggle() {
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
   });
+}
+
+function initLangSelect() {
+  const drop = document.querySelector<HTMLElement>('[data-lang-drop]');
+  if (!drop) return;
+  const btn = drop.querySelector('.lang-drop-btn');
+  if (!btn) return;
+
+  const close = () => {
+    drop.removeAttribute('data-open');
+    btn.setAttribute('aria-expanded', 'false');
+  };
+  const open = () => {
+    drop.setAttribute('data-open', '');
+    btn.setAttribute('aria-expanded', 'true');
+  };
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (drop.hasAttribute('data-open')) { close(); } else { open(); }
+  });
+
+  document.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 }
 
 function initPrintButton() {

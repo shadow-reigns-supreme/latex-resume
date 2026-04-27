@@ -16,8 +16,8 @@ export const en: ResumeData = {
     print: 'Print',
     langNav: 'Language',
   },
-  synopsis: 'SaaS founder and software architect. Building platforms full-time through Shadow Software LLC. Offshore tax specialist, SEO/AEO consultant, and founder of AmericanGunTrader.com and DabDash.com.',
-  synopsisHtml: 'SaaS founder and software architect. Building platforms full-time through <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">Shadow Software LLC</a>. Offshore tax specialist, SEO/AEO consultant, and founder of AmericanGunTrader.com and DabDash.com.',
+  synopsis: `Senior Software Executive with ${new Date().getFullYear() - 2013}+ years of impressive industry experience. Founder of ShadowSoftware.com, AmericanGunTrader.com™ and DabDash.com.`,
+  synopsisHtml: `Senior Software Executive with ${new Date().getFullYear() - 2013}+ years of impressive industry experience. Founder of <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">ShadowSoftware.com</a>, <a href="/americanguntrader/">AmericanGunTrader.com™</a> and <a href="/dabdash/">DabDash.com</a>.`,
   venturesContext: 'Built and scaled through Shadow Software LLC.',
   ventures: [
     {

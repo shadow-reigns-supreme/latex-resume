@@ -75,6 +75,7 @@ See `BLOGGING.md` for usage examples.
 | `.wp-stats` | `div` | Ruled row of bold metrics — required on every post |
 | `.wp-tech` | `div` | Tag chip row (jurisdictions, tech stacks, platforms) |
 | `.wp-table` | `div` | Scrollable comparison table wrapper |
+| `.wp-code` | `div` | Syntax-highlighted code block (GitHub Dark palette, `data-lang` label) |
 | `.wp-faq` | `section` | FAQ accordion (HTML only, no JS collapse) |
 | `.wp-faq-item` | `div` | Individual Q&A pair |
 | `.wp-trademark` | `p` | Small muted disclosure line with top rule |

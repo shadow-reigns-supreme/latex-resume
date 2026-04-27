@@ -1,0 +1,62 @@
+---
+interface Props {
+  currentPath: string;
+  currentLang?: string;
+}
+
+const { currentPath, currentLang } = Astro.props;
+
+const isResume = currentPath === '/' || currentPath === '/es/' || currentPath === '/th/';
+const isBlog = currentPath.startsWith('/blog');
+---
+
+<nav class="top-nav" aria-label="Site navigation">
+  <a href="/" aria-current={isResume ? 'page' : undefined}>Resume</a>
+  <span class="nav-sep" aria-hidden="true">/</span>
+  <a href="/blog/" aria-current={isBlog ? 'page' : undefined}>Blog</a>
+
+  {currentLang !== undefined && (
+    <>
+      <span class="nav-sep" aria-hidden="true">/</span>
+      <div class="lang-drop" data-lang-drop>
+        <button class="lang-drop-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+          {currentLang === 'en' && <><span class="lang-flag" aria-hidden="true">🇺🇸</span> EN</>}
+          {currentLang === 'es' && <><span class="lang-flag" aria-hidden="true">🇪🇸</span> ES</>}
+          {currentLang === 'th' && <><span class="lang-flag" aria-hidden="true">🇹🇭</span> TH</>}
+          <svg class="lang-chevron" width="8" height="5" viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="1,1 4,4 7,1"/>
+          </svg>
+        </button>
+        <ul class="lang-drop-menu" role="listbox" aria-label="Select language">
+          <li role="option" aria-selected={currentLang === 'en'}>
+            <a href="/" hreflang="en"><span aria-hidden="true">🇺🇸</span> EN</a>
+          </li>
+          <li role="option" aria-selected={currentLang === 'es'}>
+            <a href="/es/" hreflang="es"><span aria-hidden="true">🇪🇸</span> ES</a>
+          </li>
+          <li role="option" aria-selected={currentLang === 'th'}>
+            <a href="/th/" hreflang="th"><span aria-hidden="true">🇹🇭</span> TH</a>
+          </li>
+        </ul>
+      </div>
+    </>
+  )}
+
+  <span class="nav-sep" aria-hidden="true">/</span>
+  <button class="theme-toggle" type="button" aria-label="Toggle theme">
+    <svg class="icon-sun" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+      <circle cx="6.5" cy="6.5" r="2.25"/>
+      <line x1="6.5" y1="0.5" x2="6.5" y2="1.75"/>
+      <line x1="6.5" y1="11.25" x2="6.5" y2="12.5"/>
+      <line x1="0.5" y1="6.5" x2="1.75" y2="6.5"/>
+      <line x1="11.25" y1="6.5" x2="12.5" y2="6.5"/>
+      <line x1="2.4" y1="2.4" x2="3.3" y2="3.3"/>
+      <line x1="9.7" y1="9.7" x2="10.6" y2="10.6"/>
+      <line x1="10.6" y1="2.4" x2="9.7" y2="3.3"/>
+      <line x1="3.3" y1="9.7" x2="2.4" y2="10.6"/>
+    </svg>
+    <svg class="icon-moon" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M10.5 8A5 5 0 0 1 5 2.5a5 5 0 1 0 5.5 5.5z"/>
+    </svg>
+  </button>
+</nav>
