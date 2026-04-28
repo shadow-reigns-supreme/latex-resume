@@ -16,8 +16,8 @@ export const th: ResumeData = {
     print: 'พิมพ์',
     langNav: 'ภาษา',
   },
-  synopsis: `ผู้บริหารซอฟต์แวร์อาวุโสที่มีประสบการณ์ในอุตสาหกรรมกว่า ${new Date().getFullYear() - 2013}+ ปี ผู้ก่อตั้ง ShadowSoftware.com, AmericanGunTrader.com™ และ DabDash.com`,
-  synopsisHtml: `ผู้บริหารซอฟต์แวร์อาวุโสที่มีประสบการณ์ในอุตสาหกรรมกว่า ${new Date().getFullYear() - 2013}+ ปี ผู้ก่อตั้ง <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">ShadowSoftware.com</a>, <a href="/americanguntrader/">AmericanGunTrader.com™</a> และ <a href="/dabdash/">DabDash.com</a>`,
+  synopsis: 'ผู้บริหารซอฟต์แวร์อาวุโสที่มีประสบการณ์ในอุตสาหกรรมกว่า 13+ ปี ผู้ก่อตั้ง ShadowSoftware.com, AmericanGunTrader.com™ และ DabDash.com',
+  synopsisHtml: 'ผู้บริหารซอฟต์แวร์อาวุโสที่มีประสบการณ์ในอุตสาหกรรมกว่า 13+ ปี ผู้ก่อตั้ง <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">ShadowSoftware.com</a>, <a href="/americanguntrader/">AmericanGunTrader.com™</a> และ <a href="/dabdash/">DabDash.com</a>',
   venturesContext: 'สร้างและขยายผ่าน Shadow Software LLC',
   ventures: [
     {

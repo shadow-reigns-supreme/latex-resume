@@ -16,8 +16,8 @@ export const es: ResumeData = {
     print: 'Imprimir',
     langNav: 'Idioma',
   },
-  synopsis: `Ejecutivo de software senior con ${new Date().getFullYear() - 2013}+ años de destacada experiencia en la industria. Fundador de ShadowSoftware.com, AmericanGunTrader.com™ y DabDash.com.`,
-  synopsisHtml: `Ejecutivo de software senior con ${new Date().getFullYear() - 2013}+ años de destacada experiencia en la industria. Fundador de <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">ShadowSoftware.com</a>, <a href="/americanguntrader/">AmericanGunTrader.com™</a> y <a href="/dabdash/">DabDash.com</a>.`,
+  synopsis: 'Ejecutivo de software senior con 13+ años de destacada experiencia en la industria. Fundador de ShadowSoftware.com, AmericanGunTrader.com™ y DabDash.com.',
+  synopsisHtml: 'Ejecutivo de software senior con 13+ años de destacada experiencia en la industria. Fundador de <a href="https://www.shadowsoftware.com" target="_blank" rel="noopener">ShadowSoftware.com</a>, <a href="/americanguntrader/">AmericanGunTrader.com™</a> y <a href="/dabdash/">DabDash.com</a>.',
   venturesContext: 'Construidos y escalados a través de Shadow Software LLC.',
   ventures: [
     {
