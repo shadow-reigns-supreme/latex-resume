@@ -86,7 +86,7 @@ Either failure blocks the commit. Fix and re-stage — do not use `--no-verify`.
 ```typescript
 let data: Post[] = [];
 try {
-  const res = await fetch(url, { headers: { 'x-shadowmen': SECRET } });
+  const res = await fetch(url);
   if (res.ok) {
     const json = await res.json();
     if (Array.isArray(json)) data = json as Post[];

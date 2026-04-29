@@ -1,29 +1,27 @@
 # Blog System
 
-All posts live in a MySQL `rays_blogs` table, fetched via n8n webhooks. The blog is fully database-driven — **never create `.astro` files for blog posts**. Static files shadow the `[slug]` route and break the publish workflow.
+All posts live in a MySQL `rays_blogs` table, fetched via API. The blog is fully database-driven — **never create `.astro` files for blog posts**. Static files shadow the `[slug]` route and break the publish workflow.
 
 ## How It Works
 
 ```
                    Build time                      Request time
                    ──────────                      ────────────
-blog/index.astro ──→ n8n webhook ──→ post list     blog/[slug].astro ──→ n8n webhook ──→ single post
+blog/index.astro ──→ API endpoint ──→ post list    blog/[slug].astro ──→ API endpoint ──→ single post
                                         ↓                                                      ↓
                                     renders index                                       renders via
                                     (prerendered)                                       Whitepaper.astro
 ```
 
-`blog/index.astro` is prerendered: it hits n8n at build time, gets the post list, and bakes the HTML. Individual post pages are SSR: each request hits n8n live.
+`blog/index.astro` is prerendered: it hits the API at build time, gets the post list, and bakes the HTML. Individual post pages are SSR: each request hits the API live.
 
-## n8n Webhooks
-
-All require header: `x-shadowmen: 508e7579-374c-47ec-9d6d-a024f9a65a89`
+## API Endpoints
 
 | Purpose | Method | URL |
 |---|---|---|
-| All posts (build-time) | GET | `https://n8n.americanguntrader.com/webhook/491d8b14-ea4f-48b1-bde4-d1136a023a41` |
-| Categories (build-time) | GET | `https://n8n.americanguntrader.com/webhook/67a78c43-734d-407a-9bfe-da21cca71d34` |
-| Single post by slug (SSR) | GET | `https://n8n.americanguntrader.com/webhook/8d5b7bc7-f6ac-4b6c-a8ff-77296fb40e6a?slug={slug}` |
+| All posts (build-time) | GET | `https://api.shadowsoftware.com/ray/blogs` |
+| Categories (build-time) | GET | `https://api.shadowsoftware.com/ray/categories` |
+| Single post by slug (SSR) | GET | `https://api.shadowsoftware.com/ray/blogs/{slug}` |
 | Upsert post | MCP | `mcp__n8n-raywinkelman__Upsert` |
 | Featured image search | MCP | `mcp__n8n-raywinkelman__GetFeaturedImage` |
 | Submit sitemap | MCP | `mcp__n8n-raywinkelman__SubmitSitemap` |

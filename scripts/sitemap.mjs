@@ -23,9 +23,7 @@ const staticPages = [
 
 let blogPosts = [];
 try {
-  const res = await fetch('https://n8n.americanguntrader.com/webhook/491d8b14-ea4f-48b1-bde4-d1136a023a41', {
-    headers: { 'x-shadowmen': '508e7579-374c-47ec-9d6d-a024f9a65a89' },
-  });
+  const res = await fetch('https://api.shadowsoftware.com/ray/blogs');
   if (res.ok) {
     const data = await res.json();
     if (Array.isArray(data)) {

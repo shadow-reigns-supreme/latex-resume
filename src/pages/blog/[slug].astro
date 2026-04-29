@@ -17,8 +17,7 @@ let post: {
 
 try {
   const res = await fetch(
-    `https://n8n.americanguntrader.com/webhook/8d5b7bc7-f6ac-4b6c-a8ff-77296fb40e6a?slug=${encodeURIComponent(slug ?? '')}`,
-    { headers: { 'x-shadowmen': '508e7579-374c-47ec-9d6d-a024f9a65a89' } }
+    `https://api.shadowsoftware.com/ray/blogs/${encodeURIComponent(slug ?? '')}`
   );
   if (res.ok) {
     const data = await res.json();
